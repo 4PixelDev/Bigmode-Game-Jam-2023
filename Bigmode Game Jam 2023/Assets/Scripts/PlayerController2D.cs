@@ -9,18 +9,19 @@ public class PlayerController2D : MonoBehaviour
     [SerializeField] private float jumpVelocity = 14f;
 
     private Rigidbody2D rb;
-
     float moveInput;
 
     // flip player
     bool facingRight = true;
 
+    [Header("Ground Debug")]
     // Ground Check Parameters
     public bool isGrounded;
     public Transform groundCheck;
     public LayerMask whatIsGround;
     public float checkRadius;
-    // Start is called before the first frame update
+
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -47,7 +48,6 @@ public class PlayerController2D : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
-
     }
 
     private void PlayerMovement()
