@@ -5,8 +5,8 @@ using UnityEngine.U2D;
 
 public class SwitchColors : MonoBehaviour
 {
-    [SerializeField] private GameObject platform_A_Yellow;
-    [SerializeField] private GameObject platform_B_Blue;
+    [SerializeField] private GameObject[] platform_A_Yellow;
+    [SerializeField] private GameObject[] platform_B_Blue;
 
     public bool isOn = true;
 
@@ -16,12 +16,26 @@ public class SwitchColors : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.E))
         {
             // change platforms colors
-            platform_A_Yellow.SetActive(isOn);
-            platform_B_Blue.SetActive(!isOn);
-            isOn = !isOn;
+            SwitchColorsSystem();
 
             //play player's move animation
             // Play SFX 
+        }
+
+        void SwitchColorsSystem()
+        {
+            isOn = !isOn;
+
+
+            foreach (GameObject objYellow in platform_A_Yellow)
+            {
+                objYellow.SetActive(!isOn);
+            }
+
+            foreach (GameObject objBlue in platform_B_Blue)
+            {
+                objBlue.SetActive(isOn);
+            }
         }
     }
 }
