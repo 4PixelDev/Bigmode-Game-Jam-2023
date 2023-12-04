@@ -14,9 +14,17 @@ public class SceneLoader : MonoBehaviour
         {
             SceneManager.LoadScene(nextSceneIndex);
         }
+
         else
         {
-            Debug.LogWarning("No next scene available. You've reached the end of the build settings.");
+            SceneManager.LoadScene("Main Menu");
+            //Debug.LogWarning("No next scene available. You've reached the end of the build settings.");
         }
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+        Debug.Log("Quitting");
     }
 }

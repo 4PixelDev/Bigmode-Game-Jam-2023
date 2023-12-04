@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController2D : MonoBehaviour
 {
@@ -21,6 +22,8 @@ public class PlayerController2D : MonoBehaviour
     public LayerMask whatIsGround;
     public float checkRadius;
 
+    [Header("Sound")]
+    [SerializeField] private AudioSource jumpSound;
 
     void Start()
     {
@@ -30,6 +33,9 @@ public class PlayerController2D : MonoBehaviour
     private void Update()
     {
         PlayerJump();
+
+        // R to restart scene
+        if (Input.GetKeyDown(KeyCode.R)) { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
     }
     private void FixedUpdate()
     {
@@ -41,6 +47,7 @@ public class PlayerController2D : MonoBehaviour
     {
         if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
         {
+            jumpSound.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
         }
 

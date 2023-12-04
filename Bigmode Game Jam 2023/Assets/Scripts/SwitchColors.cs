@@ -10,6 +10,9 @@ public class SwitchColors : MonoBehaviour
 
     public bool isOn = true;
 
+    // sound 
+    [SerializeField] private AudioSource switchColorsSFX;
+
     // Update is called once per frame
     void Update()
     {
@@ -18,8 +21,9 @@ public class SwitchColors : MonoBehaviour
             // change platforms colors
             SwitchColorsSystem();
 
-            //play player's move animation
             // Play SFX 
+            switchColorsSFX.Play();
+            //play player's move animation
         }
 
         void SwitchColorsSystem()
