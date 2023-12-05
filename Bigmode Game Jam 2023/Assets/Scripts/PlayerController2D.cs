@@ -25,8 +25,11 @@ public class PlayerController2D : MonoBehaviour
     [Header("Sound")]
     [SerializeField] private AudioSource jumpSound;
 
+    private Animator anim;
+
     void Start()
     {
+        anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
     }
 
@@ -36,6 +39,8 @@ public class PlayerController2D : MonoBehaviour
 
         // R to restart scene
         if (Input.GetKeyDown(KeyCode.R)) { SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); }
+
+        anim.SetFloat("yVelocity", rb.velocity.y);
     }
     private void FixedUpdate()
     {
@@ -55,6 +60,17 @@ public class PlayerController2D : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
         }
+
+        if (isGrounded == true)
+        {
+            anim.SetBool("isJump", false);
+        }
+        else
+        {
+            anim.SetBool("isJump", true);
+
+        }
+
     }
 
     private void PlayerMovement()
@@ -70,6 +86,18 @@ public class PlayerController2D : MonoBehaviour
         {
             Flip();
         }
+
+
+        // run animation condisions
+        if (moveInput == 0)
+        {
+            anim.SetBool("isRun", false);
+        }
+        else
+        {
+            anim.SetBool("isRun", true);
+        }
+
     }
 
     private void Flip()
