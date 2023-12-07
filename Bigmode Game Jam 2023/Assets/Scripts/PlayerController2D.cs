@@ -27,6 +27,14 @@ public class PlayerController2D : MonoBehaviour
 
     private Animator anim;
 
+
+    private float coyoteTime = 0.2f;
+    private float coyoteTimeCounter;
+
+
+    private float jumpBufferTime = 0.2f;
+    private float jumpBufferCounter;
+
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -50,16 +58,62 @@ public class PlayerController2D : MonoBehaviour
 
     private void PlayerJump()
     {
-        if (isGrounded && Input.GetKeyDown(KeyCode.UpArrow))
+        if (isGrounded) { coyoteTimeCounter = coyoteTime; }
+        else { coyoteTimeCounter -= Time.deltaTime; }
+
+        if (Input.GetKeyDown(KeyCode.UpArrow)) { jumpBufferCounter = jumpBufferTime; }
+        if (Input.GetKeyDown(KeyCode.W)) { jumpBufferCounter = jumpBufferTime; }
+        if (Input.GetKeyDown(KeyCode.Space)) { jumpBufferCounter = jumpBufferTime; }
+        else { jumpBufferCounter -= Time.deltaTime; }
+
+
+        if (coyoteTimeCounter > 0f && jumpBufferCounter > 0)
         {
             jumpSound.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
+
+            jumpBufferCounter = 0f;
         }
+
+        if (coyoteTimeCounter > 0f && jumpBufferCounter > 0)
+        {
+            jumpSound.Play();
+            rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
+
+            jumpBufferCounter = 0f;
+
+        }
+
+        if (coyoteTimeCounter > 0f && jumpBufferCounter > 0)
+        {
+            jumpSound.Play();
+            rb.velocity = new Vector2(rb.velocity.x, jumpVelocity);
+            jumpBufferCounter = 0f;
+        }
+
+
+
+
 
         if (Input.GetKeyUp(KeyCode.UpArrow) && rb.velocity.y > 0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            coyoteTimeCounter = 0f;
         }
+
+        if (Input.GetKeyUp(KeyCode.W) && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            coyoteTimeCounter = 0f;
+        }
+
+        if (Input.GetKeyUp(KeyCode.Space) && rb.velocity.y > 0f)
+        {
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            coyoteTimeCounter = 0f;
+        }
+
+
 
         if (isGrounded == true)
         {

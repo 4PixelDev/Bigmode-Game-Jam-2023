@@ -213,7 +213,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
-  checkRadius: 0.1
+  checkRadius: 0.05
   jumpSound: {fileID: 0}
 --- !u!114 &2358882825367611129
 MonoBehaviour:
